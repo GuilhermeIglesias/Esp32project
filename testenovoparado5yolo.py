@@ -6,21 +6,18 @@ import time
 import scipy.optimize
 from ultralytics import YOLO
 
-# ================================================================
-# CONFIGURAÇÃO
-# ================================================================
+
 URL_right  = "http://10.225.89.205"   
 URL_left = "http://10.225.89.43"  
-BASELINE  = 10.5   # distância entre câmeras em cm
+BASELINE  = 15   # distância entre câmeras em cm
 
 TEMPO_ESTAVEL = 5.0      # segundos parado para medir
-MOVIMENTO_MAX = 30       # píxeis de tolerância para considerar "parado"
+MOVIMENTO_MAX = 30       # píxeis de tolerância para considerar parado
 CONF_MINIMA   = 0.4      # confiança mínima YOLO
 
 # Após calibração, coloca aqui os valores (ou deixa None para calibrar automaticamente)
 fl       = None
 tantheta = None
-# ================================================================
 
 model = YOLO("yolo12n.pt")
 
@@ -290,13 +287,13 @@ def processar_e_desenhar(frame_l, frame_r):
 
     return img_l, img_r
 
-# ================================================================
+
 print("Sistema Stereo ESP32-CAM + YOLO")
 print("O objeto deve ficar 5s parado para ser medido/calibrado")
 print("Prima Q na janela para sair")
 print("=" * 45)
 
-# Se já tiveres fl e tantheta de sessões anteriores, activa aqui:
+# Se tver fl e tantheta de sessões anteriores, ativar aqui:
 if fl is not None and tantheta is not None:
     calib_fl  = fl
     calib_tan = tantheta
